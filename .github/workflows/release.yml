@@ -10,46 +10,24 @@ permissions:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        include:
-          - target: aarch64-apple-darwin
-            os: macos-latest
-          - target: x86_64-apple-darwin
-            os: macos-latest
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
+          targets: aarch64-apple-darwin
 
       - name: Build
-        run: cargo build --release --target ${{ matrix.target }}
+        run: cargo build --release --target aarch64-apple-darwin
 
       - name: Package
         run: |
-          cd target/${{ matrix.target }}/release
-          tar czf ../../../skm-${{ matrix.target }}.tar.gz skm
-          cd ../../..
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: skm-${{ matrix.target }}
-          path: skm-${{ matrix.target }}.tar.gz
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          merge-multiple: true
+          cd target/aarch64-apple-darwin/release
+          tar czf ../../../skm-aarch64-apple-darwin.tar.gz skm
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: skm-*.tar.gz
+          files: skm-aarch64-apple-darwin.tar.gz
           generate_release_notes: true
