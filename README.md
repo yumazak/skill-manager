@@ -1,6 +1,6 @@
 # skm - Skill Manager
 
-Download Claude Code skills from GitHub.
+Download and manage Claude Code skills from GitHub.
 
 ## Install
 
@@ -11,14 +11,23 @@ mise use -g github:yumazak/skill-manager@latest
 ## Usage
 
 ```bash
-# Download to ./.claude/skills/ (default, local project)
-skm https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy
+# Install a skill (default: ./.claude/skills/)
+skm install https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy
+skm i https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy
 
-# Download to ~/.claude/skills/ (global)
-skm https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy -g
+# Install globally (~/.claude/skills/)
+skm install -g https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy
+
+# Uninstall a skill
+skm uninstall generate-sandbox-policy
+skm uninstall -g generate-sandbox-policy
+
+# List installed skills
+skm list
+skm list -g
 ```
 
-## Requirements
+## Notes
 
 - Target directory must contain `SKILL.md` (validates it's a valid skill)
 - Public GitHub repositories only (no authentication required)

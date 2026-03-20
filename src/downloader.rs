@@ -3,9 +3,9 @@ use crate::github::{GitHubClient, GitHubContent, GitHubUrl};
 use std::fs;
 use std::path::{Path, PathBuf};
 
-pub fn resolve_destination(skill_name: &str, local: bool) -> Result<PathBuf, SkmError> {
+pub fn resolve_skills_dir(local: bool) -> Result<PathBuf, SkmError> {
     if local {
-        return Ok(PathBuf::from(".claude").join("skills").join(skill_name));
+        return Ok(PathBuf::from(".claude").join("skills"));
     }
 
     let home = dirs::home_dir().ok_or_else(|| {
@@ -14,7 +14,11 @@ pub fn resolve_destination(skill_name: &str, local: bool) -> Result<PathBuf, Skm
             "Home directory not found",
         ))
     })?;
-    Ok(home.join(".claude").join("skills").join(skill_name))
+    Ok(home.join(".claude").join("skills"))
+}
+
+pub fn resolve_destination(skill_name: &str, local: bool) -> Result<PathBuf, SkmError> {
+    Ok(resolve_skills_dir(local)?.join(skill_name))
 }
 
 pub fn download_skill(github_url: &GitHubUrl, dest: &Path) -> Result<(), SkmError> {
