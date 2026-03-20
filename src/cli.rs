@@ -5,7 +5,7 @@ use clap::Parser;
 pub struct Cli {
     /// GitHub URL of the skill directory
     pub url: String,
-    /// Download to ./.claude/skills/ instead of ~/.claude/skills/
-    #[arg(long)]
-    pub local: bool,
+    /// Download to ~/.claude/skills/ instead of ./.claude/skills/
+    #[arg(long, short)]
+    pub global: bool,
 }

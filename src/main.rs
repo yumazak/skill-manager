@@ -17,7 +17,8 @@ fn main() -> anyhow::Result<()> {
         github_url.skill_name, github_url.owner, github_url.repo
     );
 
-    let dest = downloader::resolve_destination(&github_url.skill_name, args.local)?;
+    let local = !args.global;
+    let dest = downloader::resolve_destination(&github_url.skill_name, local)?;
 
     downloader::download_skill(&github_url, &dest)?;
 

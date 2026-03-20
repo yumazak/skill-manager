@@ -9,7 +9,6 @@ fn download_skill_from_github() {
 
     let output = Command::new(env!("CARGO_BIN_EXE_skm"))
         .arg("https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy")
-        .arg("--local")
         .current_dir(temp.path())
         .output()
         .expect("Failed to execute skm");

@@ -11,11 +11,11 @@ mise use -g github:yumazak/skill-manager@latest
 ## Usage
 
 ```bash
-# Download to ~/.claude/skills/
+# Download to ./.claude/skills/ (default, local project)
 skm https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy
 
-# Download to ./.claude/skills/ (local project)
-skm https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy --local
+# Download to ~/.claude/skills/ (global)
+skm https://github.com/NVIDIA/OpenShell/tree/main/.agents/skills/generate-sandbox-policy -g
 ```
 
 ## Requirements
